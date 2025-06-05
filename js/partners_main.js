@@ -637,14 +637,32 @@ function tourm_content_load_scripts() {
             }
 
             new Swiper('.categorySlider', {
-                slidesPerView: 5,
-                spaceBetween: 60,
+                slidesPerView: 1,
+                // autoplay:{
+
+                //     delay:5000,
+                //     disableOnInteraction:false,
+                //   },
+                spaceBetween: 40,
                 centeredSlides: true,
                 loop: true,
                 grabCursor: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
+                },
+                on: {
+                slideChangeTransitionEnd: function () {
+                    var myCurrentSlide = this.realIndex;
+                   //set the action
+                    if(myCurrentSlide != 0){
+                     //perform action to change color
+                    //  console.log(myCurrentSlide); 
+                    }
+                    else {
+                    //perform action to reset the function
+                    }
+                  },
                 },
                 breakpoints: {
                     300: {
@@ -653,19 +671,19 @@ function tourm_content_load_scripts() {
                     },
                     600: {
                         slidesPerView: 2,
-                        spaceBetween: 30
+                        spaceBetween: 10
                     },
                     768: {
                         slidesPerView: 3,
-                        spaceBetween: 30
+                        spaceBetween: 20
                     },
                     1024: {
                         slidesPerView: 4,
-                        spaceBetween: 40
+                        spaceBetween: 30
                     },
                     1280: {
                         slidesPerView: 5,
-                        spaceBetween: 60
+                        spaceBetween: 35
                     }
                 }
             });
@@ -1382,80 +1400,9 @@ function tourm_content_load_scripts() {
     $(window).scroll(animateElements);
 
      /*----------- 15. Filter ----------*/  
-     $(".filter-active").imagesLoaded(function () {
-        var $filter = ".filter-active",
-            $filterItem = ".filter-item",
-            $filterMenu = ".filter-menu-active";
-
-        if ($($filter).length > 0) {
-            var $grid = $($filter).isotope({
-                itemSelector: $filterItem,
-                filter: "*",
-                masonry: {
-                    // use outer width of grid-sizer for columnWidth
-                    columnWidth: 1,
-                },
-            });
-
-            // filter items on button click
-            $($filterMenu).on("click", "button", function () {
-                var filterValue = $(this).attr("data-filter");
-                $grid.isotope({
-                    filter: filterValue,
-                });
-            });
-
-            // Menu Active Class
-            $($filterMenu).on("click", "button", function (event) {
-                event.preventDefault();
-                $(this).addClass("active");
-                $(this).siblings(".active").removeClass("active");
-            });
-        }
-    });
-
-    $(".masonary-active").imagesLoaded(function () {
-        var $filter = ".masonary-active",
-            $filterItem = ".filter-item";
-
-        if ($($filter).length > 0) {
-            $($filter).isotope({
-                itemSelector: $filterItem,
-                filter: "*",
-                masonry: {
-                    // use outer width of grid-sizer for columnWidth
-                    columnWidth: 1,
-                },
-            });
-        }
-    });
-
-    $(".masonary-active, .woocommerce-Reviews .comment-list").imagesLoaded(function () {
-        var $filter = ".masonary-active, .woocommerce-Reviews .comment-list",
-            $filterItem = ".filter-item, .woocommerce-Reviews .comment-list li";
-
-        if ($($filter).length > 0) {
-            $($filter).isotope({
-                itemSelector: $filterItem,
-                filter: "*",
-                masonry: {
-                    // use outer width of grid-sizer for columnWidth
-                    columnWidth: 1,
-                },
-            });
-        }
-        $('[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $($filter).isotope({
-                filter: "*",
-            });
-        });
-    });
-
+    
     /*----------- 14. Counter Up ----------*/
-    $(".counter-number").counterUp({
-        delay: 10,
-        time: 1000,
-    });
+    
 
 
     /*----------- 15. Shape Mockup ----------*/
@@ -1485,16 +1432,7 @@ function tourm_content_load_scripts() {
         $('.shape-mockup').shapeMockup();
     }
 
-    /*----------- 16. Progress Bar Animation ----------*/
-    $('.progress-bar').waypoint(function () {
-        $('.progress-bar').css({
-            animation: "animate-positive 1.8s",
-            opacity: "1"
-        });
-    }, {
-        offset: '75%'
-    });
-
+   
     /*----------- 17. Countdown ----------*/
 
     $.fn.countdown = function () {
@@ -1710,43 +1648,10 @@ $(function () {
     });
 
     /*----------- Search Masonary ----------*/
-    $('.search-active').imagesLoaded(function () { 
-        var $filter = '.search-active',
-        $filterItem = '.filter-item';
-
-        if ($($filter).length > 0) {
-        var $grid = $($filter).isotope({
-            itemSelector: $filterItem,
-            filter: '*',
-            // masonry: {
-            // // use outer width of grid-sizer for columnWidth
-            //     columnWidth: 1
-            // }
-        });
-        };
-    });
+   
 
     // /*----------- 00.Color Scheme ----------*/
-    $('.color-switch-btns button').each(function () {
-        // Get color for button
-        const button = $(this);
-        const color = button.data('color');
-        button.css('--theme-color', color);
-
-        // Change theme color on click
-        button.on('click', function () {
-            const clickedColor = $(this).data('color');
-            $(':root').css('--theme-color', clickedColor);
-        });
-    });
-
-    $(document).on('click', '.switchIcon', function () {
-        $('.color-scheme-wrap').toggleClass('active');
-    });
-
-
-
-
+   
 
     // /*----------- Gsap Animation ----------*/
     if ($('.cursor-follower').length > 0) {
